@@ -2,28 +2,33 @@
 import { ref } from 'vue';
 import axios from 'axios';
 const emit = defineEmits(['colorChange']);
+
 defineProps({currentColor: String})
 
 const quote = ref({quote: "The only limit to our realization of tomorrow is our doubts of today.", author: "Franklin D. Roosevelt"})
+
 async function newQuote() {
   await axios.get("https://api.api-ninjas.com/v1/quotes",
     {
      headers: {
         "X-API-KEY": `${import.meta.env.VITE_API_KEY}`
       }
-    }).then((response) => console.log(response.data))
+    }).then((response) => quote.value = response.data[0])
   emit('colorChange');
 }
+
 </script>
+
 <template>
   <div class="quote-component">
     <blockquote :style="{color: currentColor}">
-      <p>The only limit to our realization of tomorrow is our doubts of today.</p>
-      <footer>- Franklin D. Roosevelt</footer>
+      <p>{{ quote.quote }}</p>
+      <footer>- {{ quote.author }}</footer>
       <button :style="{backgroundColor: currentColor}" @click="newQuote">New quote</button>
     </blockquote>
   </div>
 </template>
+
 <style scoped>
 .quote-component {
   display: flex;
