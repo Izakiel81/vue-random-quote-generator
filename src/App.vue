@@ -8,6 +8,8 @@ const currentColor = ref(colors[Math.floor(Math.random() * colors.length)])
 function getRandomColor() {
   currentColor.value = colors[Math.floor(Math.random() * colors.length)];
 }
+
+console.log(import.meta.env.VITE_API_KEY)
 </script>
 
 <template>

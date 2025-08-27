@@ -1,16 +1,24 @@
 <script setup>
 import { ref } from 'vue';
+import axios from 'axios';
 const emit = defineEmits(['colorChange']);
 defineProps({currentColor: String})
-const quote = ref(null)
-function newQuote() {
+
+const quote = ref({quote: "The only limit to our realization of tomorrow is our doubts of today.", author: "Franklin D. Roosevelt"})
+async function newQuote() {
+  await axios.get("https://api.api-ninjas.com/v1/quotes",
+    {
+     headers: {
+        "X-API-KEY": `${import.meta.env.VITE_API_KEY}`
+      }
+    }).then((response) => console.log(response.data))
   emit('colorChange');
 }
 </script>
 <template>
   <div class="quote-component">
     <blockquote :style="{color: currentColor}">
-      <p> The only limit to our realization of tomorrow is our doubts of today.</p>
+      <p>The only limit to our realization of tomorrow is our doubts of today.</p>
       <footer>- Franklin D. Roosevelt</footer>
       <button :style="{backgroundColor: currentColor}" @click="newQuote">New quote</button>
     </blockquote>
