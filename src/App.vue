@@ -1,9 +1,10 @@
 <script setup>
 import QuoteComponent from './components/QuoteComponent.vue';
+
 </script>
 
 <template>
-  <div id="app">
+  <div id="app" :style="{backgroundColor: '#f0f0f0'}">
     <QuoteComponent /> 
   </div>
 </template>
