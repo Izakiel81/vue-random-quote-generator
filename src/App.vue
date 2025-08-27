@@ -19,4 +19,9 @@ import QuoteComponent from './components/QuoteComponent.vue';
   align-items: center;
   height: 100vh;
 }
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 </style>
