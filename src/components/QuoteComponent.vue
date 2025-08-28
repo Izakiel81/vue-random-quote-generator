@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import axios from 'axios';
+import quotes from '../quotes.json';
 const emit = defineEmits(['colorChange']);
 
 defineProps({currentColor: String})
@@ -8,15 +8,10 @@ defineProps({currentColor: String})
 const quote = ref({quote: "The only limit to our realization of tomorrow is our doubts of today.", author: "Franklin D. Roosevelt"})
 
 async function newQuote() {
-  await axios.get("https://api.api-ninjas.com/v1/quotes",
-    {
-     headers: {
-        "X-API-KEY": `${import.meta.env.VITE_API_KEY}`
-      }
-    }).then((response) => quote.value = response.data[0])
+  const randomIndex = Math.floor(Math.random() * quotes.length);
+  quote.value = quotes[randomIndex];
   emit('colorChange');
 }
-
 </script>
 
 <template>
@@ -51,7 +46,7 @@ blockquote p {
   margin: 0;
   margin-bottom: 1rem;
 
-  transition: color 0.3s ease;
+  transition: color 0.5s ease;
 }
 blockquote p::before {
   content: "\201C";
@@ -59,6 +54,12 @@ blockquote p::before {
 blockquote p::after {
   content: "\201D";
 }
+blockquote footer {
+  align-self: flex-end;
+  font-style: italic;
+
+  transition: color 0.5s ease;
+} 
 blockquote button {
   align-self: flex-end;
   

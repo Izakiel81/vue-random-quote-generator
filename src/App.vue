@@ -30,7 +30,7 @@ function getRandomColor() {
   width: 100%;
   height: 100vh;
 
-  transition: backgroundColor 0.3s ease;
+  transition: background-color 0.5s ease;
 }
 *{
   margin: 0;
