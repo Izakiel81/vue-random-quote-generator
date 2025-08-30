@@ -1,25 +1,30 @@
 <script setup>
-import { ref } from 'vue';
-import quotes from '../quotes.json';
-const emit = defineEmits(['colorChange']);
+import { ref } from "vue";
+import quotes from "../quotes.json";
+const emit = defineEmits(["colorChange"]);
 
-defineProps({currentColor: String})
-
-const quote = ref({quote: "The only limit to our realization of tomorrow is our doubts of today.", author: "Franklin D. Roosevelt"})
+defineProps({ currentColor: String });
+const quote = ref({
+  quote:
+    "The only limit to our realization of tomorrow is our doubts of today.",
+  author: "Franklin D. Roosevelt",
+});
 
 async function newQuote() {
   const randomIndex = Math.floor(Math.random() * quotes.length);
   quote.value = quotes[randomIndex];
-  emit('colorChange');
+  emit("colorChange");
 }
 </script>
 
 <template>
   <div class="quote-component">
-    <blockquote :style="{color: currentColor}">
+    <blockquote :style="{ color: currentColor }">
       <p>{{ quote.quote }}</p>
       <footer>- {{ quote.author }}</footer>
-      <button :style="{backgroundColor: currentColor}" @click="newQuote">New quote</button>
+      <button :style="{ backgroundColor: currentColor }" @click="newQuote">
+        New quote
+      </button>
     </blockquote>
   </div>
 </template>
@@ -59,10 +64,10 @@ blockquote footer {
   font-style: italic;
 
   transition: color 0.5s ease;
-} 
+}
 blockquote button {
   align-self: flex-end;
-  
+
   border: none;
   color: white;
 
